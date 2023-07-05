@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,11 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.smd.agecalculatorandreminder.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -171,14 +171,56 @@ fun LoginScreen() {
                         .padding(start = 10.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Face,
+                        painter = painterResource(id = R.drawable.ic_google_logo),
                         contentDescription = "Google Button",
-                        tint = Color.Black
+                        tint = Color.Unspecified
                     )
-                    Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "Sign in with Google",
+                        text = "Sign In With Google",
                         color = Color(0xFF181A1F),
+                        fontWeight = FontWeight(600)
+                    )
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp)
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(Color(0xFF3A579B))
+                        .padding(start = 10.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_fb_logo),
+                        contentDescription = "Facebook Button",
+                        tint = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = "Sign In With Facebook",
+                        color = Color(0xFFFFFFFF),
+                        fontWeight = FontWeight(600)
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Don't Have An Account?",
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = "Sign Up",
+                        color = Color(0xFF4251BC),
                         fontWeight = FontWeight(600)
                     )
                 }
