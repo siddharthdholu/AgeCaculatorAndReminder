@@ -29,12 +29,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.smd.agecalculatorandreminder.R
+import com.smd.agecalculatorandreminder.ui.theme.interBold
+import com.smd.agecalculatorandreminder.ui.theme.interNormal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,16 +61,17 @@ fun LoginScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Welcome Back!",
+                    text = stringResource(id = R.string.welcome_back),
                     color = Color(0xFFFFFFFF),
-                    fontWeight = FontWeight.Bold,
+                    fontFamily = interBold,
                     fontSize = 24.sp
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                    text = "Please sign in to your account",
+                    text = stringResource(id = R.string.please_sign_in_to_your_account),
                     color = Color(0xFF696A6F),
-                    fontSize = 15.sp
+                    fontSize = 15.sp,
+                    fontFamily = interNormal
                 )
                 Spacer(modifier = Modifier.height(30.dp))
                 Box(
@@ -75,65 +79,93 @@ fun LoginScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .clip(RoundedCornerShape(6.dp))
+                        .clip(RoundedCornerShape(50.dp))
                         .background(Color(0xFF262A34))
                         .padding(start = 10.dp)
 
                 ) {
                     TextField(
-                        value = username, onValueChange = { username = it }, textStyle = TextStyle(
-                            fontSize = 16.sp, color = Color(0xFFFFFFFF),
-                        ), singleLine = true, maxLines = 1, placeholder = {
+                        value = username,
+                        onValueChange = { username = it },
+                        textStyle = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color(0xFFFFFFFF),
+                            fontFamily = interNormal
+                        ),
+                        singleLine = true,
+                        maxLines = 1,
+                        placeholder = {
                             Text(
-                                text = "Username", color = Color(0xFF696A6F), fontSize = 16.sp
+                                text = stringResource(id = R.string.username),
+                                color = Color(0xFF696A6F),
+                                fontSize = 16.sp,
+                                fontFamily = interNormal
                             )
-                        }, colors = TextFieldDefaults.textFieldColors(
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
                             containerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
-                        ), modifier = Modifier
+                        ),
+                        modifier = Modifier
                             .fillMaxWidth()
                             .padding(0.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Box(
                     contentAlignment = Alignment.CenterStart,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .clip(RoundedCornerShape(6.dp))
+                        .clip(RoundedCornerShape(50.dp))
                         .background(Color(0xFF262A34))
                         .padding(start = 10.dp)
 
                 ) {
                     TextField(
-                        value = password, onValueChange = { password = it }, textStyle = TextStyle(
-                            fontSize = 16.sp, color = Color(0xFFFFFFFF),
-                        ), singleLine = true, maxLines = 1, placeholder = {
+                        value = password,
+                        onValueChange = { password = it },
+                        textStyle = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color(0xFFFFFFFF),
+                            fontFamily = interNormal
+                        ),
+                        singleLine = true,
+                        maxLines = 1,
+                        placeholder = {
                             Text(
-                                text = "Password", color = Color(0xFF696A6F), fontSize = 16.sp
+                                text = stringResource(id = R.string.password),
+                                color = Color(0xFF696A6F),
+                                fontSize = 16.sp,
+                                fontFamily = interNormal,
                             )
-                        }, colors = TextFieldDefaults.textFieldColors(
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
                             containerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
-                        ), modifier = Modifier
+                        ),
+                        modifier = Modifier
                             .fillMaxWidth()
                             .padding(0.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Forgot Password?", fontSize = 14.sp, color = Color(0xFF696A6F)
+                        text = stringResource(id = R.string.forgot_password),
+                        fontSize = 14.sp,
+                        color = Color(0xFF696A6F),
+                        fontFamily = interNormal,
+                        fontStyle = FontStyle.Italic
                     )
                 }
-                Spacer(modifier = Modifier.height(35.dp))
+                Spacer(modifier = Modifier.height(36.dp))
                 Button(
                     onClick = {},
                     colors = ButtonDefaults.buttonColors(
@@ -142,14 +174,13 @@ fun LoginScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .clip(RoundedCornerShape(6.dp))
+                        .clip(RoundedCornerShape(50.dp))
                         .background(Color(0xFF5467FF))
-                        .padding(start = 10.dp)
                 ) {
                     Text(
-                        text = "Sign In",
+                        text = stringResource(id = R.string.sign_in),
                         color = Color(0xFFFFFFFF),
-                        fontWeight = FontWeight.Bold
+                        fontFamily = interBold,
                     )
                 }
             }
@@ -166,23 +197,22 @@ fun LoginScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .clip(RoundedCornerShape(6.dp))
+                        .clip(RoundedCornerShape(50.dp))
                         .background(Color(0xFFFFFFFF))
-                        .padding(start = 10.dp)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_google_logo),
                         contentDescription = "Google Button",
                         tint = Color.Unspecified
                     )
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "Sign In With Google",
+                        text = stringResource(id = R.string.sign_in_with_google),
                         color = Color(0xFF181A1F),
-                        fontWeight = FontWeight(600)
+                        fontFamily = interBold,
                     )
                 }
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Button(
                     onClick = {},
                     colors = ButtonDefaults.buttonColors(
@@ -191,20 +221,19 @@ fun LoginScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .clip(RoundedCornerShape(6.dp))
+                        .clip(RoundedCornerShape(50.dp))
                         .background(Color(0xFF3A579B))
-                        .padding(start = 10.dp)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_fb_logo),
                         contentDescription = "Facebook Button",
                         tint = Color.White
                     )
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "Sign In With Facebook",
+                        text = stringResource(id = R.string.sign_in_with_facebook),
                         color = Color(0xFFFFFFFF),
-                        fontWeight = FontWeight(600)
+                        fontFamily = interBold,
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -214,14 +243,17 @@ fun LoginScreen() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Don't Have An Account?",
-                        color = Color.White
+                        text = stringResource(id = R.string.dont_have_an_account),
+                        color = Color.White,
+                        fontFamily = interNormal,
+                        fontSize = 14.sp,
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Sign Up",
+                        text = stringResource(id = R.string.sign_up),
                         color = Color(0xFF4251BC),
-                        fontWeight = FontWeight(600)
+                        fontFamily = interBold,
+                        fontSize = 14.sp
                     )
                 }
             }
