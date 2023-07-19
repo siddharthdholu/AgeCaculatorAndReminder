@@ -1,7 +1,8 @@
-package com.smd.agecalculatorandreminder
+package com.smd.agecalculatorandreminder.login
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.smd.agecalculatorandreminder.util.MLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,13 +13,15 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : ViewModel() {
+    private val mLog = MLog(LoginViewModel::class.simpleName.toString())
+
     private val _state = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> = _state
 
     fun onEvent(event: LoginEvent) {
         when (event) {
             LoginEvent.ForgotPassword -> {
-                Log.d("ViewModel", "ForgotPassword Clicked")
+                mLog.d("ForgotPassword Clicked")
             }
 
             is LoginEvent.SetPassword -> {
@@ -27,7 +30,7 @@ class LoginViewModel @Inject constructor(
                         password = event.password
                     )
                 }
-                Log.d("ViewModel", "Password: ${event.password}")
+                mLog.d("Password: ${event.password}")
             }
 
             is LoginEvent.SetUsername -> {
@@ -50,6 +53,10 @@ class LoginViewModel @Inject constructor(
             }
 
             LoginEvent.SignInWithGoogle -> {
+                Log.d("ViewModel", "Google Clicked")
+            }
+
+            LoginEvent.SignUp -> {
                 Log.d("ViewModel", "Google Clicked")
             }
         }

@@ -1,4 +1,4 @@
-package com.smd.agecalculatorandreminder
+package com.smd.agecalculatorandreminder.login
 
 import javax.inject.Inject
 

@@ -1,10 +1,12 @@
-package com.smd.agecalculatorandreminder
+package com.smd.agecalculatorandreminder.login
 
 sealed interface LoginEvent {
     data class SetUsername(val username: String) : LoginEvent
     data class SetPassword(val password: String) : LoginEvent
     object ForgotPassword : LoginEvent
     data class SignIn(val username: String, val password: String) : LoginEvent
-    object SignInWithGoogle: LoginEvent
-    object SignInWithFacebook: LoginEvent
+    object SignInWithGoogle : LoginEvent
+    object SignInWithFacebook : LoginEvent
+
+    object SignUp : LoginEvent
 }

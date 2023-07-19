@@ -1,4 +1,4 @@
-package com.smd.agecalculatorandreminder
+package com.smd.agecalculatorandreminder.login
 
 interface LoginRepository {
     fun onLocalLoginSuccess(username: String, password: String): Int

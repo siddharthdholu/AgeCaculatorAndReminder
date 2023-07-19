@@ -1,4 +1,4 @@
-package com.smd.agecalculatorandreminder
+package com.smd.agecalculatorandreminder.login
 
 data class LoginState(
     val username: String = "",

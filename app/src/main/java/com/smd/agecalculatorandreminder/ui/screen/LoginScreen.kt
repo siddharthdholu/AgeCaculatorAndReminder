@@ -33,9 +33,10 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.smd.agecalculatorandreminder.LoginEvent
-import com.smd.agecalculatorandreminder.LoginState
 import com.smd.agecalculatorandreminder.R
+import com.smd.agecalculatorandreminder.login.LoginEvent
+import com.smd.agecalculatorandreminder.login.LoginState
+import com.smd.agecalculatorandreminder.ui.theme.Blue01
 import com.smd.agecalculatorandreminder.ui.theme.Gray01
 import com.smd.agecalculatorandreminder.ui.theme.interBold
 import com.smd.agecalculatorandreminder.ui.theme.interNormal
@@ -274,11 +275,17 @@ fun LoginScreen(
                         fontSize = 14.sp,
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = stringResource(id = R.string.sign_up),
-                        color = Color(0xFF4251BC),
-                        fontFamily = interBold,
-                        fontSize = 14.sp
+                    ClickableText(
+                        onClick = {
+                            onEvent(LoginEvent.SignUp)
+                        },
+                        text = AnnotatedString(stringResource(id = R.string.sign_up)),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            color = Blue01,
+                            fontFamily = interBold,
+                            fontStyle = FontStyle.Italic
+                        )
                     )
                 }
             }
