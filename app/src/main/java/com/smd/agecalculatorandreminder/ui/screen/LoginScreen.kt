@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,30 +21,33 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.smd.agecalculatorandreminder.LoginEvent
+import com.smd.agecalculatorandreminder.LoginState
 import com.smd.agecalculatorandreminder.R
+import com.smd.agecalculatorandreminder.ui.theme.Gray01
 import com.smd.agecalculatorandreminder.ui.theme.interBold
 import com.smd.agecalculatorandreminder.ui.theme.interNormal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LoginScreen(
+    state: LoginState,
+    onEvent: (LoginEvent) -> Unit
+) {
+    //var username by remember { mutableStateOf("") }
+    //var password by remember { mutableStateOf("") }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -62,14 +66,14 @@ fun LoginScreen() {
             ) {
                 Text(
                     text = stringResource(id = R.string.welcome_back),
-                    color = Color(0xFFFFFFFF),
+                    color = Color.White,
                     fontFamily = interBold,
                     fontSize = 24.sp
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = stringResource(id = R.string.please_sign_in_to_your_account),
-                    color = Color(0xFF696A6F),
+                    color = Gray01,
                     fontSize = 15.sp,
                     fontFamily = interNormal
                 )
@@ -85,11 +89,13 @@ fun LoginScreen() {
 
                 ) {
                     TextField(
-                        value = username,
-                        onValueChange = { username = it },
+                        value = state.username,
+                        onValueChange = {
+                            onEvent(LoginEvent.SetUsername(it))
+                        },
                         textStyle = TextStyle(
                             fontSize = 16.sp,
-                            color = Color(0xFFFFFFFF),
+                            color = Color.White,
                             fontFamily = interNormal
                         ),
                         singleLine = true,
@@ -97,7 +103,7 @@ fun LoginScreen() {
                         placeholder = {
                             Text(
                                 text = stringResource(id = R.string.username),
-                                color = Color(0xFF696A6F),
+                                color = Gray01,
                                 fontSize = 16.sp,
                                 fontFamily = interNormal
                             )
@@ -124,11 +130,13 @@ fun LoginScreen() {
 
                 ) {
                     TextField(
-                        value = password,
-                        onValueChange = { password = it },
+                        value = state.password,
+                        onValueChange = {
+                            onEvent(LoginEvent.SetPassword(it))
+                        },
                         textStyle = TextStyle(
                             fontSize = 16.sp,
-                            color = Color(0xFFFFFFFF),
+                            color = Color.White,
                             fontFamily = interNormal
                         ),
                         singleLine = true,
@@ -136,7 +144,7 @@ fun LoginScreen() {
                         placeholder = {
                             Text(
                                 text = stringResource(id = R.string.password),
-                                color = Color(0xFF696A6F),
+                                color = Gray01,
                                 fontSize = 16.sp,
                                 fontFamily = interNormal,
                             )
@@ -157,17 +165,30 @@ fun LoginScreen() {
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.forgot_password),
-                        fontSize = 14.sp,
-                        color = Color(0xFF696A6F),
+                    ClickableText(
+                        onClick = {
+                            onEvent(LoginEvent.ForgotPassword)
+                        },
+                        text = AnnotatedString(stringResource(id = R.string.forgot_password)),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            color = Gray01,
+                            fontFamily = interNormal,
+                            fontStyle = FontStyle.Italic
+                        )
+
+                        /*fontSize = 14.sp,
+                        color = Gray01,
                         fontFamily = interNormal,
-                        fontStyle = FontStyle.Italic
+                        fontStyle = FontStyle.Italic,*/
+
                     )
                 }
                 Spacer(modifier = Modifier.height(36.dp))
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onEvent(LoginEvent.SignIn(state.username, state.password))
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent
                     ),
@@ -179,7 +200,7 @@ fun LoginScreen() {
                 ) {
                     Text(
                         text = stringResource(id = R.string.sign_in),
-                        color = Color(0xFFFFFFFF),
+                        color = Color.White,
                         fontFamily = interBold,
                     )
                 }
@@ -190,7 +211,9 @@ fun LoginScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onEvent(LoginEvent.SignInWithGoogle)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent
                     ),
@@ -198,7 +221,7 @@ fun LoginScreen() {
                         .fillMaxWidth()
                         .height(60.dp)
                         .clip(RoundedCornerShape(50.dp))
-                        .background(Color(0xFFFFFFFF))
+                        .background(Color.White)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_google_logo),
@@ -214,7 +237,9 @@ fun LoginScreen() {
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onEvent(LoginEvent.SignInWithFacebook)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent
                     ),
@@ -232,7 +257,7 @@ fun LoginScreen() {
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text = stringResource(id = R.string.sign_in_with_facebook),
-                        color = Color(0xFFFFFFFF),
+                        color = Color.White,
                         fontFamily = interBold,
                     )
                 }
@@ -264,5 +289,8 @@ fun LoginScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen() {
-    LoginScreen()
+    LoginScreen(
+        state = LoginState(),
+        onEvent = {}
+    )
 }
