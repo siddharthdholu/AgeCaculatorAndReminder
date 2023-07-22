@@ -1,24 +1,23 @@
 package com.smd.agecalculatorandreminder.login
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import com.smd.agecalculatorandreminder.base.BaseViewModel
 import com.smd.agecalculatorandreminder.util.MLog
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
-) : ViewModel() {
+) : BaseViewModel<LoginState, LoginEvent>() {
     private val mLog = MLog(LoginViewModel::class.simpleName.toString())
 
-    private val _state = MutableStateFlow(LoginState())
-    val state: StateFlow<LoginState> = _state
+    //private val _state = MutableStateFlow(LoginState())
+    //val state: StateFlow<LoginState> = _state
 
-    fun onEvent(event: LoginEvent) {
+    override fun defaultState() = LoginState()
+    override fun onEvent(event: LoginEvent) {
         when (event) {
             LoginEvent.ForgotPassword -> {
                 mLog.d("ForgotPassword Clicked")
